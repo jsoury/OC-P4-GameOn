@@ -226,6 +226,9 @@ input {
 .disabled {
   opacity: 0;
 }
+.formData {
+  margin: 30px 0;
+}
 .formData:not(.radio)[data-error]::after {
   content: attr(data-error);
   font-size: 0.8rem;
@@ -233,8 +236,8 @@ input {
   display: block;
   margin-top: 10px;
   margin-bottom: 7px;
-  text-align: right;
-  line-height: 0.3;
+  float: right;
+  line-height: 0.9;
   opacity: 0;
   transition: 0.3s;
 }
@@ -261,6 +264,7 @@ input {
 .formData.radio {
   display: flex;
   flex-direction: column-reverse;
+  width: 100%;
 }
 .formData.radio[data-error]::before {
   content: attr(data-error);
@@ -269,8 +273,8 @@ input {
   display: block;
   margin-top: 10px;
   margin-bottom: 7px;
-  text-align: right;
-  line-height: 0.3;
+  float: right;
+  line-height: 0.9;
   opacity: 0;
   transition: 0.3s;
 }
@@ -346,30 +350,16 @@ input {
   top: 19%;
 }
 .close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  width: 32px;
-  height: 32px;
-  opacity: 1;
+  color: #fff;
+  float: right;
+  margin-top: -10px;
+  font-size: 30px;
+}
+.close:hover {
+  text-decoration: none;
   cursor: pointer;
-  transform: scale(0.7);
 }
-.close:before,
-.close:after {
-  position: absolute;
-  left: 15px;
-  content: " ";
-  height: 33px;
-  width: 3px;
-  background-color: #fff;
-}
-.close:before {
-  transform: rotate(45deg);
-}
-.close:after {
-  transform: rotate(-45deg);
-}
+
 .btn-submit,
 .btn-signup {
   background: #fe142f;
