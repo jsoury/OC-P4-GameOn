@@ -237,7 +237,7 @@ input {
   margin-top: 10px;
   margin-bottom: 7px;
   float: right;
-  line-height: 0.9;
+  line-height: 1;
   opacity: 0;
   transition: 0.3s;
 }
@@ -274,7 +274,7 @@ input {
   margin-top: 10px;
   margin-bottom: 7px;
   float: right;
-  line-height: 0.9;
+  line-height: 1;
   opacity: 0;
   transition: 0.3s;
 }

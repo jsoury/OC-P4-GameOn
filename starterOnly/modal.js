@@ -33,20 +33,20 @@ const closeModal = () => {
   form.reset();
 };
 
-//hide thanks message and remove class disabled of elements formData
-const hideThanks = () => {
-  document.querySelectorAll(".formData").forEach((element) => {
-    element.classList.remove("disabled");
-  });
-  document.querySelector(".thanks").style.display = "none";
-};
-
 //show thanks message and add class disabled of elements formData
 const showThanks = () => {
   document.querySelectorAll(".formData").forEach((element) => {
     element.classList.add("disabled");
   });
   document.querySelector(".thanks").style.display = "block";
+};
+
+//hide thanks message and remove class disabled of elements formData
+const hideThanks = () => {
+  document.querySelectorAll(".formData").forEach((element) => {
+    element.classList.remove("disabled");
+  });
+  document.querySelector(".thanks").style.display = "none";
 };
 
 /*
@@ -98,11 +98,31 @@ const validateSubmit = () => {
 
 //The first name and the last name field has a minimum of 2 characters / is not empty.
 const validateFirstAndLast = (inputId) => {
+  const patern = /^[^\s][a-zA-Z '.-]{2,}/;
+  const word = /^[a-zA-Z '.-]*$/;
   const element = form.elements[inputId];
   if (element.value.length >= 2) {
+    if (!patern.test(element.value)) {
+      element.parentNode.dataset.error = `Notre système est incapable de traiter les ${
+        element === "first" ? "prénoms" : "noms"
+      } qui commence par 2 fois ${
+        element.value.trim()[0] === undefined
+          ? "espace"
+          : element.value.trim()[0]
+      }`;
+      toggleErrorMessages(element, true);
+      return false;
+    } else if (!word.test(element.value)) {
+      element.parentNode.dataset.error = `Votre ${
+        element === "first" ? "prénom" : "nom"
+      } doit être écrit sans accent et seulement avec les caractères (' . -). Desolé pour la gêne occasionné`;
+      toggleErrorMessages(element, true);
+      return false;
+    }
     toggleErrorMessages(element, false);
     return true;
   } else {
+    element.parentNode.dataset.error = "doit contenir plus de 2 caractéres";
     toggleErrorMessages(element, true);
     return false;
   }
@@ -119,14 +139,28 @@ const validateEmail = () => {
 
 //validate birthdate is not empty && > than today
 const validateBirthDate = () => {
-  const birthdate = form.elements.birthdate;
+  const elemBirthdate = form.elements.birthdate;
+  const birthdate = new Date(elemBirthdate.valueAsDate);
   let today = new Date();
-  return +today > +birthdate.valueAsDate && birthdate.valueAsDate != null
-    ? (toggleErrorMessages(birthdate, false), true)
-    : (toggleErrorMessages(birthdate, true), false);
+  var ageLimite = birthdate.setFullYear(birthdate.getFullYear() + 14);
+
+  if (elemBirthdate.valueAsDate === null) {
+    elemBirthdate.parentNode.dataset.error =
+      "Merci de saisire votre date de naisanse";
+    toggleErrorMessages(elemBirthdate, true);
+    return false;
+  } else if (ageLimite >= today) {
+    elemBirthdate.parentNode.dataset.error =
+      "vous devez avoir plus de 14 ans pour participer au marathon";
+    toggleErrorMessages(elemBirthdate, true);
+    return false;
+  } else {
+    toggleErrorMessages(elemBirthdate, false);
+    return true;
+  }
 };
 
-//validate quantity by regex ! voir si plus de 100 >1 & > 100
+//validate quantity < 100
 const validateQuantity = () => {
   const quantity = form.elements.quantity;
   return +quantity.value > 0 && +quantity.value <= 100
