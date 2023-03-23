@@ -1,6 +1,6 @@
 # OC-P4-Créez une landing page avec Javascript (GameOn)
 
-[![](https%3A%2F%2Fjsoury.github.io%2FOC-P4-GameOn%2F)](https://validator.w3.org/nu/?doc=https%3A%2F%2Fjsoury.github.io%2FOC-P4-GameOn%2F)
+[![](https://img.shields.io/w3c-validation/default?targetUrl=https%3A%2F%2Fjsoury.github.io%2FOC-P4-GameOn%2F)](https://validator.w3.org/nu/?doc=https%3A%2F%2Fjsoury.github.io%2FOC-P4-GameOn%2F)
 
 Ajouter le code JavaScript manquant pour que le formulaire soit pleinement fonctionnel.
 
